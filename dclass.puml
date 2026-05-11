@@ -1,0 +1,43 @@
+@startuml
+class Appointment {
+    private String patient_document
+    private String patient_name
+    private String patient_phone
+    private Long professional_id
+    private String professional_name
+    private Date appointment_date
+    private Time appointment_time
+    private Integer duration_minutes
+    private String reason
+    private String status
+}
+
+abstract class AppointmentBuilder {
+    protected Appointment appointment;
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public abstract void buildPatientData();
+    public abstract void buildProfessionalData();
+    public abstract void buildAppointmentDateTime();
+    public abstract void buildAppointmentDetails(); 
+}   
+
+class AppointmentDirector {
+    private AppointmentBuilder builder;
+
+    public void setBuilder(AppointmentBuilder builder) {
+        this.builder = builder;
+    }
+
+    public Appointment construct() {
+        builder.buildPatientData();
+        builder.buildProfessionalData();
+        builder.buildAppointmentDateTime();
+        builder.buildAppointmentDetails();
+        return builder.getAppointment();
+    }
+}
+@enduml
