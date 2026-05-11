@@ -2,13 +2,8 @@ package com.jrodriguez;
 
 public class RescheduledAppointmentBuilder extends AppointmentBuilder {
 
-    private Appointment originalAppointment;
-    private java.sql.Date newDate;
-    private java.sql.Time newTime;
-    private String newStatus;
-
-    public void setOriginalAppointment(Appointment originalAppointment) {
-        this.originalAppointment = originalAppointment;
+    public RescheduledAppointmentBuilder(Appointment originalAppointment) {
+        this.createNewAppointment();
         if (originalAppointment != null) {
             appointment.setPatient_document(originalAppointment.getPatient_document());
             appointment.setPatient_name(originalAppointment.getPatient_name());
@@ -19,6 +14,7 @@ public class RescheduledAppointmentBuilder extends AppointmentBuilder {
             appointment.setReason(originalAppointment.getReason());
         }
     }
+
 
     @Override
     public void buildPatientDocument(String document) {
@@ -47,13 +43,11 @@ public class RescheduledAppointmentBuilder extends AppointmentBuilder {
 
     @Override
     public void buildAppointmentDate(java.sql.Date date) {
-        this.newDate = date;
         appointment.setAppointment_date(date);
     }
 
     @Override
     public void buildAppointmentTime(java.sql.Time time) {
-        this.newTime = time;
         appointment.setAppointment_time(time);
     }
 
@@ -69,7 +63,6 @@ public class RescheduledAppointmentBuilder extends AppointmentBuilder {
 
     @Override
     public void buildStatus(String status) {
-        this.newStatus = status;
         appointment.setStatus(status);
     }
 }

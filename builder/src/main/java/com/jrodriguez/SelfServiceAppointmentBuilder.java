@@ -49,7 +49,7 @@ public class SelfServiceAppointmentBuilder extends AppointmentBuilder {
 
     @Override
     public void buildStatus(String status) {
-        appointment.setStatus(status);
+        appointment.setStatus("PENDIENTE_AUTOGESTION");
     }
 
 }

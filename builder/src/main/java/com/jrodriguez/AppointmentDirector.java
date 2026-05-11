@@ -26,19 +26,21 @@ public class AppointmentDirector {
         return builder.getAppointment();
     }
 
-    public Appointment buildSelfServiceAppointment(String document, String name, String phone) {
+    public Appointment buildSelfServiceAppointment(String document, String name, String phone, java.sql.Date date, java.sql.Time time) {
         builder.createNewAppointment();
         builder.buildPatientDocument(document);
         builder.buildPatientName(name);
         builder.buildPatientPhone(phone);
+        builder.buildAppointmentDate(date);
+        builder.buildAppointmentTime(time);
+        builder.buildStatus("");
         return builder.getAppointment();
     }
 
-    public Appointment buildRescheduledAppointment(java.sql.Date date, java.sql.Time time, String status) {
-        builder.createNewAppointment();
+    public Appointment buildRescheduledAppointment(java.sql.Date date, java.sql.Time time) {
         builder.buildAppointmentDate(date);
         builder.buildAppointmentTime(time);
-        builder.buildStatus(status);
+        builder.buildStatus("REPROGRAMADA");
         return builder.getAppointment();
     }
 }

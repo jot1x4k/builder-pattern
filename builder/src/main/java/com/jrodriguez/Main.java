@@ -16,13 +16,20 @@ public class Main {
         director.setBuilder(new SelfServiceAppointmentBuilder());
 
         System.out.println("[1]. Creando una cita medica a traves del Builder para Self Service");
-        selfServiceAppointment = director.buildSelfServiceAppointment( "123456789", "Juan Rodriguez", "3145456678" );
+        selfServiceAppointment = director.buildSelfServiceAppointment(
+            "123456789", 
+            "Juan Rodriguez", 
+            "3145456678",
+            java.sql.Date.valueOf("2023-11-01"),
+            java.sql.Time.valueOf("08:00:00")
+        );
 
         System.out.println("Cita medica creada a traves del Builder para Self Service:");
         System.out.println(selfServiceAppointment);
 
 
         System.out.println("\n[2]. Creando una cita medica a traves del Builder para Manual");
+        director.setBuilder(new ManualAppointmentBuilder());
         manualAppointment = director.buildManualAppointment( 
             "123456789", 
             "Juan Rodriguez", 
@@ -39,8 +46,14 @@ public class Main {
         System.out.println(manualAppointment);
 
         System.out.println("\n[3]. Creando una cita medica a traves del Builder para Reprogramada");
+        RescheduledAppointmentBuilder rescheduleBuilder = new RescheduledAppointmentBuilder(manualAppointment);
+        director.setBuilder(rescheduleBuilder);
+        rescheduledAppointment = director.buildRescheduledAppointment(
+            java.sql.Date.valueOf("2023-10-15"), 
+            java.sql.Time.valueOf("11:30:00")
+        );
+        
         System.out.println("Cita medica creada a traves del Builder para Reprogramada:");
-        rescheduledAppointment = director.buildRescheduledAppointment(java.sql.Date.valueOf("2023-10-11"), java.sql.Time.valueOf("11:00:00"), "Reprogramada");
         System.out.println(rescheduledAppointment);
     }
 }
