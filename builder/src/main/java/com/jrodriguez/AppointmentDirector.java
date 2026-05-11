@@ -11,7 +11,7 @@ public class AppointmentDirector {
         return builder.getAppointment();
     }
 
-    public void buildManualAppointment(String document, String name, String phone, Long professionalId, String professionalName, java.sql.Date date, java.sql.Time time, Integer duration, String reason, String status) {
+    public Appointment buildManualAppointment(String document, String name, String phone, Long professionalId, String professionalName, java.sql.Date date, java.sql.Time time, Integer duration, String reason, String status) {
         builder.createNewAppointment();
         builder.buildPatientDocument(document);
         builder.buildPatientName(name);
@@ -23,19 +23,22 @@ public class AppointmentDirector {
         builder.buildDurationMinutes(duration);
         builder.buildReason(reason);
         builder.buildStatus(status);
+        return builder.getAppointment();
     }
 
-    public void buildSelfServiceAppointment(String document, String name, String phone) {
+    public Appointment buildSelfServiceAppointment(String document, String name, String phone) {
         builder.createNewAppointment();
         builder.buildPatientDocument(document);
         builder.buildPatientName(name);
         builder.buildPatientPhone(phone);
+        return builder.getAppointment();
     }
 
-    public void buildRescheduledAppointment(java.sql.Date date, java.sql.Time time, String status) {
+    public Appointment buildRescheduledAppointment(java.sql.Date date, java.sql.Time time, String status) {
         builder.createNewAppointment();
         builder.buildAppointmentDate(date);
         builder.buildAppointmentTime(time);
         builder.buildStatus(status);
+        return builder.getAppointment();
     }
 }
